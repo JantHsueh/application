@@ -33,3 +33,8 @@ jobs:
          with:
           entrypoint: ./gradlew
           args: dependencies spotlessApply detekt assembleDebug
+       - name: Webhook
+         uses: joelwmale/webhook-action@master
+         env:
+           WEBHOOK_URL: "https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164"
+           data: "Hello from github action ,Android 更新"
