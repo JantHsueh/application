@@ -28,11 +28,11 @@ jobs:
 #      - name: Build with Gradle
 #        chmod +x
 #        run: ./gradlew build
-       - name: "Run test suite"
-         uses: msfjarvis/setup-android@1.0
-         with:
-          entrypoint: ./gradlew
-          args: dependencies spotlessApply detekt assembleDebug
+#       - name: "Run test suite"
+#         uses: msfjarvis/setup-android@1.0
+#         with:
+#          entrypoint: ./gradlew
+#          args: dependencies spotlessApply detekt assembleDebug
        - name: Webhook
          uses: joelwmale/webhook-action@master
          env:
