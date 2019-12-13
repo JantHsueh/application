@@ -20,10 +20,16 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: set up JDK 1.8
-        uses: actions/setup-java@v1
-        with:
-          java-version: 1.8
-      - name: Build with Gradle
-        run: ./gradlew build
+#      - uses: actions/checkout@v1
+#      - name: set up JDK 1.8
+#        uses: actions/setup-java@v1
+#        with:
+#          java-version: 1.8
+#      - name: Build with Gradle
+#        chmod +x
+#        run: ./gradlew build
+       - name: "Run test suite"
+         uses: msfjarvis/setup-android@1.0
+         with:
+          entrypoint: ./gradlew
+          args: dependencies spotlessApply detekt assembleDebug
