@@ -43,7 +43,6 @@ jobs:
 
 #        向钉钉发送消息
        - name: Webhook
-         id: 1
          uses: joelwmale/webhook-action@master
          env:
            WEBHOOK_URL: "https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164"
