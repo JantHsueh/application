@@ -27,6 +27,9 @@ jobs:
           java-version: 1.8
       - name: Build with Gradle
         run: chmod +x gradlew &&./gradlew assembleRelease
+
+      - name: Build with Gradle
+        run: chmod +x aapt &&./aapt dump badging app/build/outputs/apk/release/app-release.apk
 #      - name: "Run test suite"
 #         uses: msfjarvis/setup-android@1.0
 #         with:
