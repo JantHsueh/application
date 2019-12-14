@@ -54,8 +54,8 @@ task myPrebuildTask(type: Exec) {
     } else {
         println(versionName)
         println(versionCode)
-        commandLine 'sh', '-c', 'pwd'
-        commandLine 'sh', '-c', 'source setEnv.sh -a '+versionCode+' -b '+versionName
+        commandLine 'bash', '-c', 'pwd'
+        commandLine 'bash', '-c', 'source setEnv.sh -a '+versionCode+' -b '+versionName
     }
 }
 
