@@ -6,9 +6,6 @@ do
         VERSION_CODE=$OPTARG
         export VERSION_CODE
         echo $VERSION_CODE
-	env | grep VERSION_CODE
-	set | grep VERSION_CODE
-        source /etc/profile
         ;;
 
         b)
