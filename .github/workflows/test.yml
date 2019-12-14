@@ -26,7 +26,8 @@ jobs:
         with:
           java-version: 1.8
       - name: Build with Gradle
-        run: ./gradlew build
+         run  chmod +x gradlew
+         run  ./gradlew assembleRelease
 #      - name: "Run test suite"
 #         uses: msfjarvis/setup-android@1.0
 #         with:
