@@ -3,18 +3,18 @@ name: CI
 on: [push]
 
 jobs:
-#  build:
-#
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#    - uses: actions/checkout@v1
-#    - name: Run a one-line script
-#      run: echo Hello, world!
-#    - name: Run a multi-line script
-#      run: |
-#        echo Add other actions to build,
-#        echo test, and deploy your project.
+  #  build:
+  #
+  #    runs-on: ubuntu-latest
+  #
+  #    steps:
+  #    - uses: actions/checkout@v1
+  #    - name: Run a one-line script
+  #      run: echo Hello, world!
+  #    - name: Run a multi-line script
+  #      run: |
+  #        echo Add other actions to build,
+  #        echo test, and deploy your project.
 
   build:
 
@@ -31,12 +31,12 @@ jobs:
 
       - name: Build with Gradle
         run: chmod +x aapt &&./aapt dump badging app/build/outputs/apk/release/app-release.apk
-#      - name: "Run test suite"
-#         uses: msfjarvis/setup-android@1.0
-#         with:
-#          entrypoint: ./gradlew
-#          args: dependencies spotlessApply detekt assembleDebug
-#     上传apk 到action，在右上角查看
+      #      - name: "Run test suite"
+      #         uses: msfjarvis/setup-android@1.0
+      #         with:
+      #          entrypoint: ./gradlew
+      #          args: dependencies spotlessApply detekt assembleDebug
+      #     上传apk 到action，在右上角查看
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
@@ -50,9 +50,9 @@ jobs:
         #调用接口修改数据库的版本号
 
 
-#        向钉钉发送消息
-       - name: Webhook
-         uses: JantHsueh/webhook-action@master
-         env:
-           WEBHOOK_URL: "https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164"
-           data: '{"msgtype": "text","text": {"content": "来自github 的消息 Android 更新"}}'
+      #        向钉钉发送消息
+      - name: Webhook
+        uses: JantHsueh/webhook-action@master
+        env:
+          WEBHOOK_URL: "https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164"
+          data: '{"msgtype": "text","text": {"content": "来自github 的消息 Android 更新"}}'
