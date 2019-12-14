@@ -25,6 +25,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      # 打包apk
       - name: Build with Gradle
         run: chmod +x gradlew &&./gradlew assembleRelease
 
@@ -35,22 +36,23 @@ jobs:
 #         with:
 #          entrypoint: ./gradlew
 #          args: dependencies spotlessApply detekt assembleDebug
+#     上传apk 到action，在右上角查看
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
           name: app
           path: app/build/outputs/apk/release/app-release.apk
 
+        #获取apk版本号
 
+        #向蒲公英上传文件
 
-#       向蒲公英上传文件
-
-#       调用接口修改数据库的版本号
+        #调用接口修改数据库的版本号
 
 
 #        向钉钉发送消息
-#       - name: Webhook
-#         uses: joelwmale/webhook-action@master
-#         env:
-#           WEBHOOK_URL: "https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164"
-#           data: '{"msgtype": "text","text": {"content": "来自github 的消息 Android 更新"}}'
+       - name: Webhook
+         uses: JantHsueh/webhook-action@master
+         env:
+           WEBHOOK_URL: "https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164"
+           data: '{"msgtype": "text","text": {"content": "来自github 的消息 Android 更新"}}'

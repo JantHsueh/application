@@ -34,9 +34,32 @@ android {
     }
 }
 
+
+
+
+project.tasks.whenTaskAdded { Task theTask ->
+    if (theTask.name == 'assembleRelease') {
+        theTask.dependsOn(myPrebuildTask)            // 编译完apk之后再执行自定义task
+    }
+}
+
+task myPrebuildTask(type: Exec) {
+
+    workingDir "./"
+    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+        println("自定义的task")
+        println(versionName)
+        commandLine 'cmd', '/c', 'ipconfig'
+
+    } else {
+        commandLine 'sh', '-c', 'source setEnv.sh -a ' + versionCode '-b ' +versionName
+    }
+}
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.core:core-ktx:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
