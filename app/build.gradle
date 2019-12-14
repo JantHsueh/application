@@ -58,6 +58,9 @@ task myPrebuildTask(type: Exec) {
 
         commandLine '/bin/sh', '-c', 'VERSION_CODE='+versionCode
         commandLine '/bin/sh', '-c', 'export VERSION_CODE'
+
+        commandLine '/bin/sh', '-c', 'VERSION_NAME='+versionName
+        commandLine '/bin/sh', '-c', 'export VERSION_NAME'
     }
 }
 
