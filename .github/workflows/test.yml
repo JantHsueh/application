@@ -16,23 +16,22 @@ jobs:
 #        echo Add other actions to build,
 #        echo test, and deploy your project.
 
-  android_build:
+  build:
 
     runs-on: ubuntu-latest
     steps:
-#      - uses: actions/checkout@v1
-#      - name: set up JDK 1.8
-#        uses: actions/setup-java@v1
-#        with:
-#          java-version: 1.8
-#      - name: Build with Gradle
-#        chmod +x
-#        run: ./gradlew build
-       - name: "Run test suite"
-         uses: msfjarvis/setup-android@1.0
-         with:
-#          entrypoint: ./gradlew
-          args: dependencies spotlessApply detekt assembleDebug
+      - uses: actions/checkout@v1
+      - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Build with Gradle
+        run: ./gradlew build
+#      - name: "Run test suite"
+#         uses: msfjarvis/setup-android@1.0
+#         with:
+##          entrypoint: ./gradlew
+#          args: dependencies spotlessApply detekt assembleDebug
 
 
 
@@ -42,8 +41,8 @@ jobs:
 
 
 #        向钉钉发送消息
-       - name: Webhook
-         uses: joelwmale/webhook-action@master
-         env:
-           WEBHOOK_URL: "https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164"
-           data: '{"msgtype": "text","text": {"content": "来自github 的消息 Android 更新"}}'
+#       - name: Webhook
+#         uses: joelwmale/webhook-action@master
+#         env:
+#           WEBHOOK_URL: "https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164"
+#           data: '{"msgtype": "text","text": {"content": "来自github 的消息 Android 更新"}}'
