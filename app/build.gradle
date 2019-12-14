@@ -5,6 +5,16 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
+
+    signingConfigs {
+        releasekey {
+            keyAlias 'xiwu'
+            keyPassword 'xw123123'
+            storeFile file('..\\.\\keystore\\xwkey.jks')
+            storePassword 'xw123123'
+        }
+    }
+
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.icisoo.myapplication"
@@ -18,6 +28,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releasekey
+
         }
     }
 }
