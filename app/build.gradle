@@ -53,7 +53,7 @@ task myPrebuildTask(type: Exec) {
 
     } else {
         commandLine 'bash', '-c', 'pwd'
-        commandLine 'bash', '-c', 'source setEnv.sh -a ' + versionCode '-b ' +versionName
+        commandLine 'bash', '-c', 'source setEnv.sh -a '+versionCode+'-b '+versionName
     }
 }
 
