@@ -26,11 +26,11 @@ jobs:
         with:
           java-version: 1.8
       - name: Build with Gradle
-         run: chmod +x gradlew &&./gradlew build
+        run: chmod +x gradlew &&./gradlew build
 #      - name: "Run test suite"
 #         uses: msfjarvis/setup-android@1.0
 #         with:
-##          entrypoint: ./gradlew
+#          entrypoint: ./gradlew
 #          args: dependencies spotlessApply detekt assembleDebug
 
 
