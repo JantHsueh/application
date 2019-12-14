@@ -54,4 +54,4 @@ jobs:
           url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
           method: POST
           payload: '{"msgtype": "text", "text": {"content": "github app 更新 内部版本号 $VERSION_NAME 版本号 $VERSION_NAME "}}'
-          headers: 'Content-Type: application/json'
+          headers: '{"Content-Type": "application/json"}'
