@@ -56,15 +56,15 @@ task myPrebuildTask(type: Exec) {
         println(versionCode)
         commandLine '/bin/sh', '-c', 'pwd'
 
-        commandLine '/bin/sh', '-c', 'VERSION_CODE='+versionCode
+        commandLine '/bin/sh', '-c', 'VERSION_CODE='
         commandLine '/bin/sh', '-c', 'export VERSION_CODE'
         commandLine '/bin/sh', '-c', 'env | grep VERSION_CODE'
-        commandLine '/bin/sh', '-c', 'echo 123123'
+        commandLine '/bin/sh', '-c', 'echo 1'+versionCode
 
         commandLine '/bin/sh', '-c', 'VERSION_NAME='+versionName
         commandLine '/bin/sh', '-c', 'export VERSION_NAME'
         commandLine '/bin/sh', '-c', 'env | grep VERSION_NAME'
-        commandLine '/bin/sh', '-c', 'echo 1234565'
+        commandLine '/bin/sh', '-c', 'echo 1234565'+versionCode
     }
 }
 

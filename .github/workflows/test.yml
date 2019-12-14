@@ -27,18 +27,18 @@ jobs:
           java-version: 1.8
       # 打包apk
       - name: Build with Gradle
-        run: chmod +x gradlew &&./gradlew assembleRelease && echo $VERSION_NAME && echo "123123"
+        run: chmod +x gradlew &&./gradlew assembleRelease && echo $VERSION_NAME && echo "yml123123"
       #      - name: "Run test suite"
       #         uses: msfjarvis/setup-android@1.0
       #         with:
       #          entrypoint: ./gradlew
       #          args: dependencies spotlessApply detekt assembleDebug
       #     上传apk 到action，在右上角查看
-      - name: Upload APK
-        uses: actions/upload-artifact@v1
-        with:
-          name: app
-          path: app/build/outputs/apk/release/app-release.apk
+#      - name: Upload APK
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: app
+#          path: app/build/outputs/apk/release/app-release.apk
 
         #获取apk版本号
 
@@ -48,10 +48,10 @@ jobs:
 
 
       #        向钉钉发送消息
-      - name: Webhook
-        uses: satak/webrequest-action@master
-        with:
-          url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
-          method: POST
-          payload: '{"msgtype": "text", "text": {"content": "github app 更新 内部版本号${{ env.VERSION_NAME }} 版本号 ${{ env.VERSION_NAME }} "}}'
-          headers: '{"Content-Type": "application/json"}'
+#      - name: Webhook
+#        uses: satak/webrequest-action@master
+#        with:
+#          url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
+#          method: POST
+#          payload: '{"msgtype": "text", "text": {"content": "github app 更新 内部版本号${{ env.VERSION_NAME }} 版本号 ${{ env.VERSION_NAME }} "}}'
+#          headers: '{"Content-Type": "application/json"}'
