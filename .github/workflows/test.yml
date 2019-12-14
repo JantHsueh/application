@@ -27,10 +27,7 @@ jobs:
           java-version: 1.8
       # 打包apk
       - name: Build with Gradle
-        env:
-          WEBHOOK_URL: "https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164"
-        run: chmod +x gradlew &&./gradlew assembleRelease && apt-get update && apt-get install -y curl && curl -X POST -H "Content-Type: application/json" --data "{"msgtype": "text", "text": {"content": "github app 更新 内部版本号 $VERSION_CODE 版本号 $VERSION_NAME"}}" $WEBHOOK_URL
-
+        run: chmod +x gradlew &&./gradlew assembleRelease
       #      - name: "Run test suite"
       #         uses: msfjarvis/setup-android@1.0
       #         with:
@@ -52,7 +49,9 @@ jobs:
 
       #        向钉钉发送消息
       - name: Webhook
-        uses: JantHsueh/webhook-action@master
-        env:
-          WEBHOOK_URL: "https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164"
-          data: '{"msgtype": "text","text": {"content": "来自github 的消息 Android 更新"}}'
+        uses: satak/webrequest-action@master
+        with:
+          url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
+          method: POST
+          payload: '{"msgtype": "text", "text": {"content": "github app 更新 内部版本号 ${{ env.$VERSION_CODE }} 版本号 ${{ env.$VERSION_NAME }}"}}'
+          headers: 'Content-Type: application/json'
