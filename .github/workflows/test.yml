@@ -47,7 +47,7 @@ jobs:
         #调用接口修改数据库的版本号
 
       - name: apiInfo
-        id: apiInfo
+        id: api
         uses: JantHsueh/webrequest-action@master
 #        with:
 #          url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
@@ -55,11 +55,14 @@ jobs:
 #          payload: '{"msgtype": "text", "text": {"content": "github app 更新 内部版本号${{ env.VERSION_NAME }} 版本号 ${{ env.VERSION_NAME }} "}}'
 #          headers: '{"Content-Type": "application/json"}'
 
+
+      - name: Get the output time
+        run: echo "The time was ${{ steps.api.outputs.time }}"
 #              向钉钉发送消息
-      - name: Webhook
-        uses: satak/webrequest-action@master
-        with:
-          url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
-          method: POST
-          payload: '{"msgtype": "text", "text1": {"content": "github app 更新 内部版本号${{steps.apiInfo.outputs.apiInfo}} 版本号 ${{steps.apiInfo.outputs.apiInfo.versionName }} "}}'
-          headers: '{"Content-Type": "application/json"}'
+#      - name: Webhook
+#        uses: satak/webrequest-action@master
+#        with:
+#          url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
+#          method: POST
+#          payload: '{"msgtype": "text", "text1": {"content": "github app 更新 内部版本号${{steps.apiInfo.outputs.apiInfo}} 版本号 ${{steps.apiInfo.outputs.apiInfo.versionName }} "}}'
+#          headers: '{"Content-Type": "application/json"}'
