@@ -54,6 +54,7 @@ jobs:
 #          method: POST
 #          payload: '{"msgtype": "text", "text": {"content": "github app 更新 内部版本号${{ env.VERSION_NAME }} 版本号 ${{ env.VERSION_NAME }} "}}'
 #          headers: '{"Content-Type": "application/json"}'
+      - name: run
         run: |
           $output = '${{ steps.apiInfo.outputs.apiInfo }}' | ConvertFrom-Json
           Write-Host "Time from output $($output.time) "
