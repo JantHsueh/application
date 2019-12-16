@@ -51,8 +51,8 @@ jobs:
         with:
           url: https://www.pgyer.com/apiv2/app/upload
           method: POST
-          forms: [['_api_key','${{ secrets.pgyer_key }}'],['buildInstallType',3]]
-          fileForms: [['file','app/build/outputs/apk/release/app-release.apk']]
+          forms: "[['_api_key','${{ secrets.pgyer_key }}'],['buildInstallType',3]]"
+          fileForms: "[['file','app/build/outputs/apk/release/app-release.apk']]"
 
         #获取apk版本号
       - name: GetApiInfo
