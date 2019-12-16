@@ -1,6 +1,6 @@
 name: CI
 
-on: [push]
+on:
   push:
     branches:
       - master
@@ -34,7 +34,7 @@ jobs:
       - name: Build with Gradle
         run: chmod +x gradlew &&./gradlew assembleRelease && echo $VERSION_NAME && echo "yml123123"
 
-#     上传apk 到action，在右上角查看
+      #     上传apk 到action，在右上角查看
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:
@@ -63,7 +63,7 @@ jobs:
           payload: '{"id":1,"softwareType":1,"version":"${{ steps.apk.outputs.versionNum }}","versionDesc":"app更新时间 ${{ steps.apk.outputs.time}}","versionNum":${{ steps.apk.outputs.versionCode }}}'
           headers: '{"Content-Type": "application/json","authorization":"Cs_SfVScr2019","platform":"android"}'
 
-#        向钉钉发送消息
+      #        向钉钉发送消息
       - name: dingtalk
         uses: satak/webrequest-action@master
         with:
