@@ -30,23 +30,21 @@ jobs:
         run: chmod +x gradlew &&./gradlew assembleRelease && echo $VERSION_NAME && echo "yml123123"
 
 #     上传apk 到action，在右上角查看
-#      - name: Upload APK
-#        uses: actions/upload-artifact@v1
-#        with:
-#          name: app
-#          path: app/build/outputs/apk/release/app-release.apk
-
-
+      - name: Upload APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app
+          path: app/build/outputs/apk/release/app-release.apk
 
         #向蒲公英上传文件
 
-
-
+      - name: uploadToPgyer
+        run: apt-get update && apt-get install -y curl && curl -F 'file=@app/build/outputs/apk/release/app-release.apk' -F '_api_key=${{ secrets.pgyer_key }}' https://www.pgyer.com/apiv2/app/upload
 
         #获取apk版本号
-      - name: apiInfo
-        id: api
-        uses: JantHsueh/webrequest-action@master
+      - name: GetApiInfo
+        id: apk
+        uses: JantHsueh/get-apk-version-action@master
 
       # 调用接口修改数据库的版本号
       - name: updateSoftwareVersion
@@ -54,14 +52,14 @@ jobs:
         with:
           url: https://www.adsff123.com/app/guest/updateSoftwareVersion
           method: POST
-          payload: '{"id":1,"softwareType":1,"version":"${{ steps.api.outputs.versionNum }}","versionDesc":"app更新时间 ${{ steps.api.outputs.time}}","versionNum":${{ steps.api.outputs.versionCode }}}'
+          payload: '{"id":1,"softwareType":1,"version":"${{ steps.apk.outputs.versionNum }}","versionDesc":"app更新时间 ${{ steps.apk.outputs.time}}","versionNum":${{ steps.apk.outputs.versionCode }}}'
           headers: '{"Content-Type": "application/json","authorization":"Cs_SfVScr2019","platform":"android"}'
 
 #        向钉钉发送消息
-      - name: Webhook
+      - name: dingtalk
         uses: satak/webrequest-action@master
         with:
           url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
           method: POST
-          payload: '{"msgtype": "text", "text": {"content": "github App更新 内部版本号${{ steps.api.outputs.versionCode }} 版本号 ${{ steps.api.outputs.versionNum }}"}}'
+          payload: '{"msgtype": "text", "text": {"content": "github App更新 内部版本号${{ steps.apk.outputs.versionCode }} 版本号 ${{ steps.apk.outputs.versionNum }}"}}'
           headers: '{"Content-Type": "application/json"}'
