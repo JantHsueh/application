@@ -58,14 +58,8 @@ jobs:
 
       - name: Get the output time
         run: |
-          $output = '${{ steps.api.outputs.apkInfo }}' |
-          echo "The versionCode was  ${{ steps.api.outputs.apkInfo.versionCode }}  |
-          echo "The $output1 was  $(output)" |
-          echo "The $output2 was  $output" |
-          echo "The $output3 was  $output" |
-          echo "The $output4 was  $output" |
-          echo "The $output6 was  $output" | ConvertFrom-Json
-          Write-Host "Time from output $($output.versionCode) "
+            $output = '${{ steps.api.outputs.apkInfo }}' | ConvertFrom-Json
+            Write-Host "Time from output $($output.versionCode)"
 
 
 #              向钉钉发送消息
