@@ -47,7 +47,8 @@ jobs:
 
         #向蒲公英上传文件
       - name: Upload To Pgyer
-        run:  apt-get install -y curl && curl -F 'file=@app/build/outputs/apk/release/app-release.apk' -F '_api_key=${{ secrets.pgyer_key }}' https://www.pgyer.com/apiv2/app/upload
+        uses: JantHsueh/webhook-action@master
+        run:  curl -F 'file=@app/build/outputs/apk/release/app-release.apk' -F '_api_key=${{ secrets.pgyer_key }}' -F 'buildInstallType=3' https://www.pgyer.com/apiv2/app/upload
 
         #获取apk版本号
       - name: GetApiInfo
