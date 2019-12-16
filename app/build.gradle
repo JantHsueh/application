@@ -37,38 +37,38 @@ android {
 
 
 
-project.tasks.whenTaskAdded { Task theTask ->
-    if (theTask.name == 'assembleRelease') {
-        theTask.dependsOn(myPrebuildTask)            // 编译完apk之后再执行自定义task
-    }
-}
+//project.tasks.whenTaskAdded { Task theTask ->
+//    if (theTask.name == 'assembleRelease') {
+//        theTask.dependsOn(myPrebuildTask)            // 编译完apk之后再执行自定义task
+//    }
+//}
 
-task myPrebuildTask(type: Exec) {
-
-    workingDir "./"
-    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-        println("自定义的task")
-        println(versionName)
-        commandLine 'cmd', '/c', 'ipconfig'
-
-    } else {
-        println(versionName)
-        println(versionCode)
-//        commandLine '/bin/sh', '-c', 'pwd'
+//task myPrebuildTask(type: Exec) {
 //
-//        commandLine '/bin/sh', '-c', 'VERSION_CODE='
-//        commandLine '/bin/sh', '-c', 'export VERSION_CODE'
-//        commandLine '/bin/sh', '-c', 'env | grep VERSION_CODE'
-//        commandLine '/bin/sh', '-c', 'echo ::set-env name=VERSION_CODE::ye'+versionCode
+//    workingDir "./"
+//    if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+//        println("自定义的task")
+//        println(versionName)
+//        commandLine 'cmd', '/c', 'ipconfig'
 //
-//        commandLine '/bin/sh', '-c', 'VERSION_NAME='+versionName
-//        commandLine '/bin/sh', '-c', 'export VERSION_NAME'
-//        commandLine '/bin/sh', '-c', 'env | grep VERSION_NAME'
-//        commandLine '/bin/sh', '-c', 'echo 1234565'+versionCode
-//        commandLine '/bin/sh', '-c', 'echo ::set-env name=VERSION_NAME::ye'+versionCode
-
-    }
-}
+//    } else {
+//        println(versionName)
+//        println(versionCode)
+////        commandLine '/bin/sh', '-c', 'pwd'
+////
+////        commandLine '/bin/sh', '-c', 'VERSION_CODE='
+////        commandLine '/bin/sh', '-c', 'export VERSION_CODE'
+////        commandLine '/bin/sh', '-c', 'env | grep VERSION_CODE'
+////        commandLine '/bin/sh', '-c', 'echo ::set-env name=VERSION_CODE::ye'+versionCode
+////
+////        commandLine '/bin/sh', '-c', 'VERSION_NAME='+versionName
+////        commandLine '/bin/sh', '-c', 'export VERSION_NAME'
+////        commandLine '/bin/sh', '-c', 'env | grep VERSION_NAME'
+////        commandLine '/bin/sh', '-c', 'echo 1234565'+versionCode
+////        commandLine '/bin/sh', '-c', 'echo ::set-env name=VERSION_NAME::ye'+versionCode
+//
+//    }
+//}
 
 
 dependencies {
