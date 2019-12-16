@@ -57,7 +57,8 @@ jobs:
 
 
       - name: Get the output time
-        run: echo "The time was ${{ steps.api.outputs.apkInfo.versionCode}}"
+        run: |
+          $output = '${{ steps.api.outputs.apkInfo }}' |echo "The versionCode was  $($output.versionCode)  |echo "The $output was  $output"
 #              向钉钉发送消息
 #      - name: Webhook
 #        uses: satak/webrequest-action@master
