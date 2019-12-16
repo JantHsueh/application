@@ -1,7 +1,12 @@
 name: CI
 
 on: [push]
-
+  push:
+    branches:
+      - master
+    # 事件中要考虑的文件路径。 Optional; defaults to all.
+    paths:
+      - 'app/build.gradle'
 jobs:
   #  build:
   #
