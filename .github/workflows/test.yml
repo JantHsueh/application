@@ -28,45 +28,40 @@ jobs:
       # 打包apk
       - name: Build with Gradle
         run: chmod +x gradlew &&./gradlew assembleRelease && echo $VERSION_NAME && echo "yml123123"
-      #      - name: "Run test suite"
-      #         uses: msfjarvis/setup-android@1.0
-      #         with:
-      #          entrypoint: ./gradlew
-      #          args: dependencies spotlessApply detekt assembleDebug
-      #     上传apk 到action，在右上角查看
+
+#     上传apk 到action，在右上角查看
 #      - name: Upload APK
 #        uses: actions/upload-artifact@v1
 #        with:
 #          name: app
 #          path: app/build/outputs/apk/release/app-release.apk
 
-        #获取apk版本号
+
 
         #向蒲公英上传文件
 
-        #调用接口修改数据库的版本号
 
+
+
+        #获取apk版本号
       - name: apiInfo
         id: api
         uses: JantHsueh/webrequest-action@master
-#        with:
-#          url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
-#          method: POST
-#          payload: '{"msgtype": "text", "text": {"content": "github app 更新 内部版本号${{ env.VERSION_NAME }} 版本号 ${{ env.VERSION_NAME }} "}}'
-#          headers: '{"Content-Type": "application/json"}'
 
+      # 调用接口修改数据库的版本号
+      - name: updateSoftwareVersion
+        uses: satak/webrequest-action@master
+        with:
+          url: https://www.adsff123.com/app/guest/updateSoftwareVersion
+          method: POST
+          payload: '{"id":1,"softwareType":1,"version":"${{ steps.api.outputs.versionNum }}","versionDesc":"app更新时间 ${{ steps.api.outputs.time}}","versionNum":${{ steps.api.outputs.versionCode }}}'
+          headers: '{"Content-Type": "application/json","authorization":"Cs_SfVScr2019","platform":"android"}'
 
-      - name: Get the output time
-        run: |
-          echo "The versionCode was  ${{ steps.api.outputs.versionCode }}" |
-          echo "The versionNum was  ${{ steps.api.outputs.versionNum }}" |
-
-
-#              向钉钉发送消息
-#      - name: Webhook
-#        uses: satak/webrequest-action@master
-#        with:
-#          url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
-#          method: POST
-#          payload: '{"msgtype": "text", "text1": {"content": "github app 更新 内部版本号${{steps.apiInfo.outputs.apiInfo}} 版本号 ${{steps.apiInfo.outputs.apiInfo.versionName }} "}}'
-#          headers: '{"Content-Type": "application/json"}'
+#        向钉钉发送消息
+      - name: Webhook
+        uses: satak/webrequest-action@master
+        with:
+          url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
+          method: POST
+          payload: '{"msgtype": "text", "text": {"content": "github App更新 内部版本号${{ steps.api.outputs.versionCode }} 版本号 ${{ steps.api.outputs.versionNum }}"}}'
+          headers: '{"Content-Type": "application/json"}'
