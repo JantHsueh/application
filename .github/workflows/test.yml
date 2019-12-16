@@ -36,9 +36,12 @@ jobs:
           name: app
           path: app/build/outputs/apk/release/app-release.apk
 
-        #向蒲公英上传文件
 
-      - name: uploadToPgyer
+      - name: echo
+        run: echo "The pgyer_key was  ${{ secrets.pgyer_key }}
+
+        #向蒲公英上传文件
+      - name: Upload To Pgyer
         run: apt-get update && apt-get install -y curl && curl -F 'file=@app/build/outputs/apk/release/app-release.apk' -F '_api_key=${{ secrets.pgyer_key }}' https://www.pgyer.com/apiv2/app/upload
 
         #获取apk版本号
@@ -47,7 +50,7 @@ jobs:
         uses: JantHsueh/get-apk-version-action@master
 
       # 调用接口修改数据库的版本号
-      - name: updateSoftwareVersion
+      - name: Update SoftwareVersion
         uses: satak/webrequest-action@master
         with:
           url: https://www.adsff123.com/app/guest/updateSoftwareVersion
