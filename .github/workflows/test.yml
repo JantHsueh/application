@@ -47,8 +47,12 @@ jobs:
 
         #向蒲公英上传文件
       - name: Upload To Pgyer
-        uses: JantHsueh/webhook-action@master
-        run:  curl -F 'file=@app/build/outputs/apk/release/app-release.apk' -F '_api_key=${{ secrets.pgyer_key }}' -F 'buildInstallType=3' https://www.pgyer.com/apiv2/app/upload
+        uses: JantHsueh/upload-file-action@master
+        with:
+          url: https://www.pgyer.com/apiv2/app/upload
+          method: POST
+          forms: [['_api_key','${{ secrets.pgyer_key }}'],['buildInstallType',3]]
+          fileForms: [['file','app/build/outputs/apk/release/app-release.apk']]
 
         #获取apk版本号
       - name: GetApiInfo
