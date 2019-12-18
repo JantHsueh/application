@@ -18,8 +18,8 @@ jobs:
         with:
           java-version: 1.8
       # 打包apk
-#      - name: Build with Gradle
-#        run: chmod +x gradlew &&./gradlew assembleRelease && echo $VERSION_NAME
+      - name: Build with Gradle
+        run: chmod +x gradlew &&./gradlew assembleRelease && echo $VERSION_NAME
 #
 #      #     上传apk 到action，在右上角查看
 #      - name: Upload APK
@@ -33,18 +33,18 @@ jobs:
 #        run: echo "The pgyer_key was  ${{ secrets.pgyer_key }}"
 
         #向蒲公英上传文件
-#      - name: Upload To Pgyer
-#        uses: JantHsueh/upload-file-action@master
-#        with:
-#          url: https://www.pgyer.com/apiv2/app/upload
-#          method: POST
-#          forms: '{"_api_key":"${{ secrets.pgyer_key }}","buildInstallType":3}'
-#          fileForms: '{"file":"app/build/outputs/apk/release/app-release.apk"}'
+      - name: Upload To Pgyer
+        uses: JantHsueh/upload-file-action@master
+        with:
+          url: https://www.pgyer.com/apiv2/app/upload
+          method: POST
+          forms: '{"_api_key":"${{ secrets.pgyer_key }}","buildInstallType":3}'
+          fileForms: '{"file":"app/build/outputs/apk/release/app-release.apk"}'
 
         #获取apk版本号
-#      - name: GetApiInfo
-#        id: apk
-#        uses: JantHsueh/get-apk-version-action@master
+      - name: GetApiInfo
+        id: apk
+        uses: JantHsueh/get-apk-info-action@master
 
 
         #获取指定时区的时间
