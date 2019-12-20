@@ -56,7 +56,7 @@ jobs:
         #获取指定时区的时间
       - name: Get Time
         id: log
-        uses: JantHsueh/webhook-action@master
+        uses: JantHsueh/get-git-log-action@master
         with:
           tag: last_release
 
