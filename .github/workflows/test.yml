@@ -17,9 +17,9 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      # 打包apk
-      - name: Build with Gradle
-        run: chmod +x gradlew &&./gradlew assembleRelease && echo $VERSION_NAME
+#      # 打包apk
+#      - name: Build with Gradle
+#        run: chmod +x gradlew &&./gradlew assembleRelease && echo $VERSION_NAME
 #
 #      #     上传apk 到action，在右上角查看
 #      - name: Upload APK
@@ -32,43 +32,47 @@ jobs:
 #      - name: echo
 #        run: echo "The pgyer_key was  ${{ secrets.pgyer_key }}"
 
-        #向蒲公英上传文件
-      - name: Upload To Pgyer
-        uses: JantHsueh/upload-file-action@master
-        with:
-          url: https://www.pgyer.com/apiv2/app/upload
-          method: POST
-          forms: '{"_api_key":"${{ secrets.pgyer_key }}","buildInstallType":3}'
-          fileForms: '{"file":"app/build/outputs/apk/release/app-release.apk"}'
+#        #向蒲公英上传文件
+#      - name: Upload To Pgyer
+#        uses: JantHsueh/upload-file-action@master
+#        with:
+#          url: https://www.pgyer.com/apiv2/app/upload
+#          method: POST
+#          forms: '{"_api_key":"${{ secrets.pgyer_key }}","buildInstallType":3}'
+#          fileForms: '{"file":"app/build/outputs/apk/release/app-release.apk"}'
 
-        #获取apk版本号
-      - name: GetApiInfo
-        id: apk
-        uses: JantHsueh/get-apk-info-action@master
+#        #获取apk版本号
+#      - name: GetApiInfo
+#        id: apk
+#        uses: JantHsueh/get-apk-info-action@master
 
 
+#        #获取指定时区的时间
+#      - name: Get Time
+#        id: time
+#        uses: JantHsueh/get-time-action@master
+#        with:
+#          timeZone: 8
         #获取指定时区的时间
       - name: Get Time
-        id: time
-        uses: JantHsueh/get-time-action@master
-        with:
-          timeZone: 8
+        id: log
+        uses: JantHsueh/webhook-action@master
 
 
-      # 调用接口修改数据库的版本号
-      - name: Update SoftwareVersion
-        uses: satak/webrequest-action@master
-        with:
-          url: https://www.adsff123.com/app/guest/updateSoftwareVersion
-          method: POST
-          payload: '{"id":1,"softwareType":1,"version":"${{ steps.apk.outputs.versionNum }}","versionDesc":"app更新时间 ${{ steps.time.outputs.time}}","versionNum":${{ steps.apk.outputs.versionCode }}}'
-          headers: '{"Content-Type": "application/json","authorization":"Cs_SfVScr2019","platform":"android"}'
+#      # 调用接口修改数据库的版本号
+#      - name: Update SoftwareVersion
+#        uses: JantHsueh/webrequest-action@master
+#        with:
+#          url: https://www.adsff123.com/app/guest/updateSoftwareVersion
+#          method: POST
+#          payload: '{"id":1,"softwareType":1,"version":"${{ steps.apk.outputs.versionNum }}","versionDesc":"app更新时间 ${{ steps.time.outputs.time}}","versionNum":${{ steps.apk.outputs.versionCode }}}'
+#          headers: '{"Content-Type": "application/json","authorization":"Cs_SfVScr2019","platform":"android"}'
 
       # 向钉钉发送消息
       - name: dingtalk
-        uses: satak/webrequest-action@master
+        uses: JantHsueh/webrequest-action@master
         with:
           url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
           method: POST
-          payload: '{"msgtype": "text", "text": {"content": "西雾代理商-测试版-App更新-版本号 ${{ steps.apk.outputs.versionNum }}"}}'
+          payload: '{"msgtype": "text", "text": {"content": "西雾代理商-测试版-App更新-版本号 更新记录 ${{ steps.log.outputs.log }}"}}'
           headers: '{"Content-Type": "application/json"}'
