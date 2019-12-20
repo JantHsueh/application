@@ -57,6 +57,8 @@ jobs:
       - name: Get Time
         id: log
         uses: JantHsueh/webhook-action@master
+        with:
+          tag: last_debug
 
 
 #      # 调用接口修改数据库的版本号
@@ -74,5 +76,5 @@ jobs:
         with:
           url: https://oapi.dingtalk.com/robot/send?access_token=a2204bb5fa64dbb008881b5cf6be791d3bfa3a6e363c56364c11b237b62c3164
           method: POST
-          payload: '{"msgtype": "text", "text": {"content": "西雾代理商-测试版-App更新-版本号 更新记录 ${{ steps.log.outputs.log }}"}}'
+          payload: '{"msgtype": "text", "text": {"content": "西雾代理商-测试版-App更新-版本号 更新记录 \n ${{ steps.log.outputs.log }}"}}'
           headers: '{"Content-Type": "application/json"}'
