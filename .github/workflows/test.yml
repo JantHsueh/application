@@ -58,7 +58,7 @@ jobs:
         id: log
         uses: JantHsueh/webhook-action@master
         with:
-          tag: last_debug
+          tag: last_release
 
 
 #      # 调用接口修改数据库的版本号
