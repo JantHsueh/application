@@ -9,30 +9,32 @@ on:
 #      - 'app/build.gradle'
 jobs:
 
- - first-job:
-    runs-on: ubuntu-latest
-    - first-steps:
-      #获取指定时区的时间
-       - name: Get Time
-         id: time
-         uses: JantHsueh/get-time-action@master
-         with:
-           timeZone: 6
-
-    - second-steps:
+  - first-job:
+      runs-on: ubuntu-latest
+      steps:
         #获取指定时区的时间
         - name: Get Time
           id: time
           uses: JantHsueh/get-time-action@master
           with:
+            timeZone: 6
+
+
+        #获取指定时区的时间
+        - name: Get Time
+          id: time
+          uses:
+            - JantHsueh/get-time-action@master
+            - JantHsueh/get-time-action@master
+          with:
             timeZone: 7
 
- - second-job:
-     runs-on: ubuntu-latest
-     steps:
-       #获取指定时区的时间
-       - name: Get Time
-         id: time
-         uses: JantHsueh/get-time-action@master
-         with:
-           timeZone: 8
+  - second-job:
+      runs-on: ubuntu-latest
+      steps:
+        #获取指定时区的时间
+        - name: Get Time
+          id: time
+          uses: JantHsueh/get-time-action@master
+          with:
+            timeZone: 8
