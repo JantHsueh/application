@@ -23,9 +23,7 @@ jobs:
         #获取指定时区的时间
         - name: Get Time
           id: time
-          uses:
-            - JantHsueh/get-time-action@master
-            - JantHsueh/get-time-action@master
+          uses: JantHsueh/get-time-action@master
           with:
             timeZone: 7
 
