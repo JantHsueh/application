@@ -22,7 +22,7 @@ jobs:
 
         #获取指定时区的时间
         - name: Get Time
-          id: time
+          id: time1
           uses: JantHsueh/get-time-action@master
           with:
             timeZone: 7
@@ -32,7 +32,7 @@ jobs:
       steps:
         #获取指定时区的时间
         - name: Get Time
-          id: time
+          id: time2
           uses: JantHsueh/get-time-action@master
           with:
             timeZone: 8
