@@ -9,7 +9,7 @@ on:
 #      - 'app/build.gradle'
 jobs:
 
-  - first-job:
+   first-job:
       runs-on: ubuntu-latest
       steps:
         #获取指定时区的时间
@@ -27,7 +27,7 @@ jobs:
           with:
             timeZone: 7
 
-  - second-job:
+   second-job:
       runs-on: ubuntu-latest
       steps:
         #获取指定时区的时间
