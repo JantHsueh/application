@@ -12,43 +12,33 @@ jobs:
   first-job:
     runs-on: ubuntu-latest
     steps:
-      step1:
-        #获取指定时区的时间
-        - name: Get Time
-          id: time
-          uses: JantHsueh/get-time-action@master
-          with:
-            timeZone: 6
-
-
-        #获取指定时区的时间
-        - name: Get Time
-          id: time1
-          uses: JantHsueh/get-time-action@master
-          with:
-            timeZone: 7
-      step2:
-        #获取指定时区的时间
-        - name: Get Time
-          id: time
-          uses: JantHsueh/get-time-action@master
-          with:
-            timeZone: 6
-
-
-        #获取指定时区的时间
-        - name: Get Time
-          id: time1
-          uses: JantHsueh/get-time-action@master
-          with:
-            timeZone: 7
-
-  second-job:
-    runs-on: ubuntu-latest
-    steps:
       #获取指定时区的时间
       - name: Get Time
-        id: time2
+        id: time
         uses: JantHsueh/get-time-action@master
         with:
-          timeZone: 8
+          timeZone: 6
+      # 打包apk
+      - name: Build with Gradle
+        run: chmod +x gradlew &&./gradlew assembleRelease
+
+      #获取指定时区的时间
+      - name: Sign Apk
+        id: sign
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: /app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+        #向蒲公英上传文件
+      - name: Upload To Pgyer
+        uses: JantHsueh/upload-file-action@master
+        with:
+          url: https://www.pgyer.com/apiv2/app/upload
+          method: POST
+          forms: '{"_api_key":"${{ secrets.pgyer_key }}","buildInstallType":3}'
+          fileForms: '{"file":"${{ steps.sign.outputs.signedReleaseFile }}"}'
+
