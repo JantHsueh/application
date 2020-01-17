@@ -46,6 +46,10 @@ jobs:
 #          method: POST
 #          forms: '{"_api_key":"${{ secrets.pgyer_key }}","buildInstallType":3}'
 #          fileForms: '{"file":"${{ steps.sign.outputs.signedReleaseFile }}"}'
+        #获取git log
+      - name: Get git log
+        id: git_log
+        uses: JantHsueh/get-git-log-action@master
 
       - name: Create Release
         id: create_release
