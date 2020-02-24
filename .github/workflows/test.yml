@@ -51,6 +51,16 @@ jobs:
         id: git_log
         uses: JantHsueh/get-git-log-action@master
 
+
+
+#      # 向钉钉发送消息
+#      - name: dingtalk
+#        uses: satak/webrequest-action@master
+#        with:
+#          url: ${{ secrets.dingtalk_webhook }}
+#          method: POST
+#          payload: '{"msgtype": "text", "text": {"content": "西雾代理商-测试版(debug)-App更新-版本号: ${{ steps.apk.outputs.versionNum }},可直接在App中更新到最新版 \n 距上个正式版的更新记录: \n${{ steps.git_log.outputs.log }}"}}'
+#          headers: '{"Content-Type": "application/json"}'
 #      - name: Create Release
 #        id: create_release
 #        uses: actions/create-release@v1.0.0
