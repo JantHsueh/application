@@ -15,6 +15,7 @@ android {
         }
     }
 
+
     compileSdkVersion 29
     defaultConfig {
         applicationId "me.xuexuan.fragmentation"

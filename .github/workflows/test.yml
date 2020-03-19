@@ -5,8 +5,10 @@ on:
     branches:
       - master
     # 事件中要考虑的文件路径。 Optional; defaults to all.
-#    paths:
-#      - 'app/build.gradle'
+    paths:
+      - 'app/build.gradle'
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 jobs:
 
   first-job:
